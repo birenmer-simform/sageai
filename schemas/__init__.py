@@ -1,6 +1,11 @@
 from .chat import Chat, ChatCreate
 from .conversation import Conversation, ConversationCreate
-from .memory import LongTermMemory, ShortTermMemory
+from .memory import (
+    LongTermMemory,
+    LongTermMemoryInput,
+    ShortTermMemory,
+    ShortTermMemoryInput,
+)
 
 __all__ = [
     "Chat",
@@ -8,5 +13,7 @@ __all__ = [
     "Conversation",
     "ConversationCreate",
     "LongTermMemory",
+    "LongTermMemoryInput",
     "ShortTermMemory",
+    "ShortTermMemoryInput",
 ]
