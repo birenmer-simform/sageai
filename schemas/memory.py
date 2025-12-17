@@ -13,6 +13,7 @@ class LongTermMemory(BaseModel):
 
     id: str = Field(alias="_id")
     user_id: str
+    created_at: datetime = Field(default_factory=utc_now)
     profile: Dict[str, Any] = Field(default_factory=dict)
     preferences: Dict[str, Any] = Field(default_factory=dict)
     background: Optional[str] = None
@@ -23,12 +24,23 @@ class LongTermMemory(BaseModel):
         populate_by_name = True
 
 
+class LongTermMemoryInput(BaseModel):
+    """Payload to create or update long-term memory."""
+
+    user_id: str
+    profile: Dict[str, Any] = Field(default_factory=dict)
+    preferences: Dict[str, Any] = Field(default_factory=dict)
+    background: Optional[str] = None
+    topics: list[str] = Field(default_factory=list)
+
+
 class ShortTermMemory(BaseModel):
     """Session/chat-scoped transient memory."""
 
     id: str = Field(alias="_id")
     chat_id: str
     user_id: str
+    created_at: datetime = Field(default_factory=utc_now)
     task: Optional[str] = None
     topic: Optional[str] = None
     temporary_preferences: Dict[str, Any] = Field(default_factory=dict)
@@ -36,3 +48,13 @@ class ShortTermMemory(BaseModel):
 
     class Config:
         populate_by_name = True
+
+
+class ShortTermMemoryInput(BaseModel):
+    """Payload to create or update short-term memory."""
+
+    chat_id: str
+    user_id: str
+    task: Optional[str] = None
+    topic: Optional[str] = None
+    temporary_preferences: Dict[str, Any] = Field(default_factory=dict)
