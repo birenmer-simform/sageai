@@ -4,7 +4,7 @@ from typing import List, Literal, Optional
 
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
 from langchain_openai import ChatOpenAI
-
+from prompts.system_prompt import SystemPrompt
 
 Role = Literal["system", "user", "assistant"]
 
@@ -39,7 +39,7 @@ class ChatService:
         role ∈ {"user", "assistant", "system"}.
         """
         messages: List[SystemMessage | HumanMessage | AIMessage] = [
-            SystemMessage(content=)
+            SystemMessage(content=SystemPrompt().get_prompt())
         ]
         if history:
             for item in history:
